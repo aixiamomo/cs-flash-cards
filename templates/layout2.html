@@ -1,0 +1,62 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Aixia-admin{% endblock %}
+{% block styles %}
+    {{ super() }}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}"/>
+    <link href="//cdn.bootcss.com/highlight.js/9.9.0/styles/github.min.css" rel="stylesheet">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+    <link href="{{ url_for('static', filename='images/apple-touch-icon-57') }}" rel="apple-touch-icon" />
+    <link href="{{ url_for('static', filename='images/apple-touch-icon-72') }}" rel="apple-touch-icon" sizes="72x72" />
+    <link href="{{ url_for('static', filename='images/apple-touch-icon-114') }}" rel="apple-touch-icon" sizes="114x114" />
+    <link href="{{ url_for('static', filename='images/apple-touch-icon-144') }}" rel="apple-touch-icon" sizes="144x144" />
+{% endblock %}
+
+
+{% block navbar %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+
+                <br/>
+                <nav class="navbar navbar-default">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="{{ url_for('index') }}">CS Flash Cards</a>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if not session.logged_in %}
+                                <li><a href="{{ url_for('login') }}">Log in</a></li>
+                            {% else %}
+                                <li><a href="{{ url_for('cards') }}">卡片复习</a></li>
+                                <li><a href="{{ url_for('general') }}">CS概念</a></li>
+                                <li><a href="{{ url_for('code') }}">代码</a></li>
+                                <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                                <li><a href="{{ url_for('logout') }}">Log out</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </nav>
+
+                {% for message in get_flashed_messages() %}
+                    <div class="alert alert-success" role="alert">{{ message }}</div>
+                {% endfor %}
+{#                {% block body %}{% endblock %}#}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+    {{ super() }}
+    <script src="https://use.fontawesome.com/8cea844162.js"></script>
+    <script src="{{ url_for('static', filename='fastclick.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='general.js') }}"></script>
+    <script src="//cdn.bootcss.com/highlight.js/9.9.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+{% endblock %}
+
