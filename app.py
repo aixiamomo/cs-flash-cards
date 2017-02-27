@@ -53,10 +53,10 @@ def close_db(error):
 
 
 # 最好在命令行里构建数据库，这里我没安装flask-scripts扩展，就直接用了路由初始化数据库
-# @app.route('/initdb')
-# def initdb():
-#     init_db()
-#     return 'Initialized the database.'
+@app.route('/initdb')
+def initdb():
+    init_db()
+    return 'Initialized the database.'
 
 
 @app.route('/')
@@ -281,6 +281,6 @@ def logout():
     flash("You've logged out")
     return redirect(url_for('index'))
 
-
-if __name__ == '__main__':
-    app.run(port=5000)
+# 默认的 wsgi server
+# if __name__ == '__main__':
+#     app.run(port=5000)
